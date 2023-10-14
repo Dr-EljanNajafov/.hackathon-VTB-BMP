@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -15,39 +12,24 @@ public class Filters {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "filters_id")
-    private int id;
-
+    private long id;
     @Column(name = "ramp_having")
-    private boolean ramp_having;
-
+    private boolean rampHaving;
     @Column(name = "cash_return")
-    private boolean cash_return;
-
+    private boolean cashReturn;
     @Column(name = "pickup_locations")
-    private boolean pickup_locations;
-
+    private boolean pickupLocations;
     @Column(name = "retail_auto_lending")
-    private boolean retail_auto_lending;
+    private boolean retailAutoLending;
+    @OneToOne(mappedBy = "filters")
+    @JoinColumn(name = "office_id")
+    private Office office;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "filters_id")
-    private List<Office> officesList;
-
-    public Filters(boolean ramp_having, boolean cash_return, boolean pickup_locations, boolean retail_auto_lending, List<Office> officesList) {
-        this.ramp_having = ramp_having;
-        this.cash_return = cash_return;
-        this.pickup_locations = pickup_locations;
-        this.retail_auto_lending = retail_auto_lending;
-        this.officesList = officesList;
-    }
-
-    public void addProductToCategories(Office offices) {
-        if (officesList == null) {
-            officesList = new ArrayList<>();
-        }
-
-        officesList.add(offices);
+    public Filters(boolean rampHaving, boolean cashReturn, boolean pickupLocations, boolean retailAutoLending, Office office) {
+        this.rampHaving = rampHaving;
+        this.cashReturn = cashReturn;
+        this.pickupLocations = pickupLocations;
+        this.retailAutoLending = retailAutoLending;
+        this.office = office;
     }
 }
-
-

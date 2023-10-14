@@ -12,32 +12,18 @@ public class ATM {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "atm_id")
-    private int id;
+    private long id;
+    private String address, bnkcd, code;
+    private double latitude, longitude;
+    @Column(name = "working_hours")
+    private String workingHours;
 
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "bnkcd")
-    private String bnkcd;
-
-    @Column(name = "code")
-    private String code;
-
-    @Column(name = "latitude")
-    private double latitude;
-
-    @Column(name = "longitude")
-    private double longitude;
-
-    @Column(name = "allDay")
-    private boolean allDay;
-
-    public ATM(String address, String bnkcd, String code, double latitude, double longitude, boolean allDay) {
+    public ATM(String address, String bnkcd, String code, double latitude, double longitude, String workingHours) {
         this.address = address;
         this.bnkcd = bnkcd;
         this.code = code;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.allDay = allDay;
+        this.workingHours = workingHours;
     }
 }
