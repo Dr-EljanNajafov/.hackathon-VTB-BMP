@@ -40,12 +40,36 @@ public class Office {
         this.status = status;
     }
 
+    public boolean getFilterState(int filterId) {
+        return switch (filterId) {
+            case 1 -> this.filters.isRampHaving();
+            case 2 -> this.filters.isCashReturn();
+            case 3 -> this.filters.isPickupLocations();
+            case 4 -> this.filters.isRetailAutoLending();
+            default -> throw new IllegalStateException("Unexpected value: " + filterId);
+        };
+    }
+
     public enum Status {
         FREE(1), NORMAL(2), MEDIUM(3), HEAVY(4);
 
         private final int id;
 
         Status(int id) {
+            this.id = id;
+        }
+
+        public int getId() {
+            return id;
+        }
+    }
+
+    public enum Filter {
+        RAMP_HAVING(1), CASH_RETURN(2), PICKUP_LOCATIONS(3), RETAIL_AUTO_LENDING(4);
+
+        private final int id;
+
+        Filter(int id) {
             this.id = id;
         }
 
